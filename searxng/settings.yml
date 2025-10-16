@@ -2,7 +2,7 @@
 use_default_settings: true
 server:
   # base_url is defined in the SEARXNG_BASE_URL environment variable, see .env and docker-compose.yml
-  secret_key: "ultrasecretkey"  # change this!  # preserved from local
+  secret_key: "e5e482d225d229108b2294ec789657cb2cf34a52fadabdd2fa1e6507f6422daf"  # generated for local testing
   limiter: false  # enable this when running the instance for a public usage on the internet
   image_proxy: true
 redis:
