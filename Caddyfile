@@ -76,6 +76,10 @@ header {
 
 	# Prevent clickjacking
 	X-Frame-Options "DENY"
+
+	# Temporary: clear client 'preferences' cookie to avoid invalid settings
+	# (will remove user preferences stored in cookie; remove this after users clear their cookies)
+	Set-Cookie "preferences=; Max-Age=0; Path=/; HttpOnly; SameSite=Lax"
 }
 
 header @api {
