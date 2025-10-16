@@ -73,6 +73,9 @@ header {
 
 	# Remove "Server" header
 	-Server
+
+	# Prevent clickjacking
+	X-Frame-Options "DENY"
 }
 
 header @api {
