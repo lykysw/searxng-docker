@@ -16,6 +16,12 @@ search:
   formats:
     - html
     - json # 这一行至关重要！
+  # engines_blocklist: explicit list of engines to block
+  engines_blocklist:
+    - wikidata
+    - ahmia
+    - torch
+    - "yacy images"
 
 engines: []
 
@@ -30,9 +36,8 @@ engines_config:
   wikidata:
     disabled: true
 
-# engines_blocklist 会显式阻止这些引擎被加载
-engines_blocklist:
-  - wikidata
-  - ahmia
-  - torch
-  - "yacy images"
+# outgoing settings
+outgoing:
+  # default timeout in seconds, can be override by engine
+  # increased to reduce SPARQL/remote timeouts during engine init
+  request_timeout: 10.0
