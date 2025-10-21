@@ -1,0 +1,1 @@
+﻿import yaml,traceback\nfrom searx.settings_defaults import apply_schema, SCHEMA\ntry:\n    cfg = yaml.safe_load(open('/etc/searxng/settings.yml'))\nexcept Exception as e:\n    print('LOAD_ERROR:', e)\n    raise\ntry:\n    apply_schema(cfg, SCHEMA, [])\n    print('SCHEMA_OK')\nexcept Exception as e:\n    print('SCHEMA_ERROR:')\n    traceback.print_exc()
