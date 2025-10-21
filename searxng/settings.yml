@@ -1,62 +1,26 @@
-# Minimal settings override to recover SearXNG runtime.
-# This file intentionally only overrides a few keys and keeps
-# use_default_settings enabled so the image defaults are merged.
-
+# Minimal settings override (clean file)
+# Keep use_default_settings:true so image defaults are merged.
 use_default_settings: true
 
 server:
-  # Replace the secret_key with a non-default value. This is overwritten by
-  # the SEARXNG_SECRET environment variable if set.
-  secret_key: "31a8f2c9b3a64c2d8f9e6b7c4d3a1b2c"
+  # Use a non-default secret_key. You may instead set SEARXNG_SECRET env.
+  secret_key: "c3d9f6e1b2a4478f9a1b2c3d4e5f6789"
 
 valkey:
-  # Point valkey to the redis service used in docker-compose
+  # point to the redis service in docker-compose
   url: "redis://redis:6379/0"
 
 outgoing:
-  # increase default request timeout to avoid engine init timeouts
+  # increase default request timeout to reduce remote init failures
   request_timeout: 10.0
 
 search:
-  # block problematic engines that previously caused init timeouts or missing
-  # configuration errors in this environment
   engines_blocklist:
     - wikidata
     - ahmia
     - torch
     - "yacy images"
 
-  # displayed name
-  instance_name: "SearXNG"
-  # For example: https://example.com/privacy
-  privacypolicy_url: false
-  # use true to use your own donation page written in searx/info/en/donate.md
-  # use false to disable the donation link
-  donation_url: false
-  # mailto:contact@example.com
-  contact_url: false
-  # record stats
-  enable_metrics: true
-  # expose stats in open metrics format at /metrics
-  # leave empty to disable (no password set)
-  # open_metrics: <password>
-  open_metrics: ''
-
-brand:
-  new_issue_url: https://github.com/searxng/searxng/issues/new
-  docs_url: https://docs.searxng.org/
-  public_instances: https://searx.space
-  wiki_url: https://github.com/searxng/searxng/wiki
-  issue_url: https://github.com/searxng/searxng/issues
-  # custom:
-  #   # Custom entries in the footer: [title]: [link]
-  #   links:
-  #     Uptime: https://uptime.searxng.org/history/darmarit-org
-  #     About: "https://searxng.org"
-
-search:
-  # Filter results. 0: None, 1: Moderate, 2: Strict
-  safe_search: 0
   # Existing autocomplete backends: "360search", "baidu", "brave", "dbpedia", "duckduckgo", "google", "yandex",
   # "mwmbl", "naver", "seznam", "sogou", "startpage", "stract", "swisscows", "quark", "qwant", "wikipedia" -
   # leave blank to turn it off by default.
