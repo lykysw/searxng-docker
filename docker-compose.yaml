@@ -41,7 +41,10 @@ services:
     ports:
       - "127.0.0.1:8888:8080"
     volumes:
-      - ./searxng:/etc/searxng:rw
+      # Temporarily disable host settings mount so the container
+      # uses its internal default configuration (helps recover
+      # from invalid host overrides). Re-enable after debugging.
+      # - ./searxng:/etc/searxng:rw
       - searxng-data:/var/cache/searxng:rw
     environment:
       - SEARXNG_BASE_URL=https://${SEARXNG_HOSTNAME:-localhost}/
