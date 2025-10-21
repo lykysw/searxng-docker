@@ -18,17 +18,9 @@ search:
     - json # 这一行至关重要！
 
 engines:
-  - name: wikidata
-    engine: wikidata
-    disabled: true  # 添加这一行来禁用wikidata引擎
-  # disable engines that are not configured in this instance to avoid startup warnings/errors
-  - name: ahmia
-    disabled: true
-  - name: torch
-    disabled: true
-  - name: "yacy images"
-    disabled: true
-  # ... 其他引擎配置
+  # 配置所需的引擎；未列出的引擎将使用默认行为。
+  # 为避免启动时尝试初始化未配置的引擎，已在下面使用 engines_blocklist 禁用某些引擎。
+
 
 # Explicit per-engine configuration to ensure engines are disabled when not configured
 engines_config:
@@ -40,3 +32,10 @@ engines_config:
     disabled: true
   wikidata:
     disabled: true
+
+# engines_blocklist 会显式阻止这些引擎被加载
+engines_blocklist:
+  - wikidata
+  - ahmia
+  - torch
+  - "yacy images"
