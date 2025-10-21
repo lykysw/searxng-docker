@@ -17,10 +17,7 @@ search:
     - html
     - json # 这一行至关重要！
 
-engines:
-  # 配置所需的引擎；未列出的引擎将使用默认行为。
-  # 为避免启动时尝试初始化未配置的引擎，已在下面使用 engines_blocklist 禁用某些引擎。
-
+engines: []
 
 # Explicit per-engine configuration to ensure engines are disabled when not configured
 engines_config:
