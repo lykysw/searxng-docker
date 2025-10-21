@@ -1,5 +1,7 @@
 use_default_settings: true
 
+use_default_settings: true
+
 server:
   secret_key: "c3d9f6e1b2a4478f9a1b2c3d4e5f6789"
 
@@ -13,193 +15,12 @@ outgoing:
   request_timeout: 10.0
 
 search:
-  engines_blocklist: [wikidata, ahmia, torch, "yacy images"]
+  engines_blocklist:
+    - wikidata
+    - ahmia
+    - torch
+    - "yacy images"
 
-# Plugin configuration, for more details see
-#   https://docs.searxng.org/admin/settings/settings_plugins.html
-#
-plugins:
-
-  searx.plugins.calculator.SXNGPlugin:
-    active: true
-
-  searx.plugins.hash_plugin.SXNGPlugin:
-    active: true
-
-  searx.plugins.self_info.SXNGPlugin:
-    active: true
-
-  searx.plugins.unit_converter.SXNGPlugin:
-    active: true
-
-  searx.plugins.ahmia_filter.SXNGPlugin:
-    active: true
-
-  searx.plugins.hostnames.SXNGPlugin:
-    active: true
-
-  searx.plugins.time_zone.SXNGPlugin:
-    active: true
-
-  searx.plugins.oa_doi_rewrite.SXNGPlugin:
-    active: false
-
-  searx.plugins.tor_check.SXNGPlugin:
-    active: false
-
-  searx.plugins.tracker_url_remover.SXNGPlugin:
-    active: true
-
-
-# Configuration of the "Hostnames plugin":
-#
-# hostnames:
-#   replace:
-#     '(.*\.)?youtube\.com$': 'yt.example.com'
-#     '(.*\.)?youtu\.be$': 'yt.example.com'
-#     '(.*\.)?reddit\.com$': 'teddit.example.com'
-#     '(.*\.)?redd\.it$': 'teddit.example.com'
-#     '(www\.)?twitter\.com$': 'nitter.example.com'
-#   remove:
-#     - '(.*\.)?facebook.com$'
-#   low_priority:
-#     - '(.*\.)?google(\..*)?$'
-#   high_priority:
-#     - '(.*\.)?wikipedia.org$'
-#
-# Alternatively you can use external files for configuring the "Hostnames plugin":
-#
-# hostnames:
-#  replace: 'rewrite-hosts.yml'
-#
-# Content of 'rewrite-hosts.yml' (place the file in the same directory as 'settings.yml'):
-# '(.*\.)?youtube\.com$': 'yt.example.com'
-# '(.*\.)?youtu\.be$': 'yt.example.com'
-#
-
-checker:
-  # disable checker when in debug mode
-  off_when_debug: true
-
-  # use "scheduling: {}" to disable scheduling
-  # scheduling: interval or int
-
-  # to activate the scheduler:
-  # * uncomment "scheduling" section
-  # * add "cache2 = name=searxngcache,items=2000,blocks=2000,blocksize=4096,bitmap=1"
-  #   to your uwsgi.ini
-
-  # scheduling:
-  #   start_after: [300, 1800]  # delay to start the first run of the checker
-  #   every: [86400, 90000]     # how often the checker runs
-
-  # additional tests: only for the YAML anchors (see the engines section)
-  #
-  additional_tests:
-    rosebud: &test_rosebud
-      matrix:
-        query: rosebud
-        lang: en
-      result_container:
-        - not_empty
-        - ['one_title_contains', 'citizen kane']
-      test:
-        - unique_results
-
-    android: &test_android
-      matrix:
-        query: ['android']
-        lang: ['en', 'de', 'fr', 'zh-CN']
-      result_container:
-        - not_empty
-        - ['one_title_contains', 'google']
-      test:
-        - unique_results
-
-  # tests: only for the YAML anchors (see the engines section)
-  tests:
-    infobox: &tests_infobox
-      infobox:
-        matrix:
-          query: ["linux", "new york", "bbc"]
-        result_container:
-          - has_infobox
-
-categories_as_tabs:
-  general:
-  images:
-  videos:
-  news:
-  map:
-  music:
-  it:
-  science:
-  files:
-  social media:
-
-engines:
-  - name: 360search
-    engine: 360search
-    shortcut: 360so
-    disabled: true
-
-  - name: 360search videos
-    engine: 360search_videos
-    shortcut: 360sov
-    disabled: true
-
-  - name: 9gag
-    engine: 9gag
-    shortcut: 9g
-    disabled: true
-
-  - name: acfun
-    engine: acfun
-    shortcut: acf
-    disabled: true
-
-  - name: adobe stock
-    engine: adobe_stock
-    shortcut: asi
-    categories: ["images"]
-    # https://docs.searxng.org/dev/engines/online/adobe_stock.html
-    adobe_order: relevance
-    adobe_content_types: ["photo", "illustration", "zip_vector", "template", "3d", "image"]
-    timeout: 6
-    disabled: true
-
-  - name: adobe stock video
-    engine: adobe_stock
-    shortcut: asv
-    network: adobe stock
-    categories: ["videos"]
-    adobe_order: relevance
-    adobe_content_types: ["video"]
-    timeout: 6
-    disabled: true
-
-  - name: adobe stock audio
-    engine: adobe_stock
-    shortcut: asa
-    network: adobe stock
-    categories: ["music"]
-    adobe_order: relevance
-    adobe_content_types: ["audio"]
-    timeout: 6
-    disabled: true
-
-  - name: alexandria
-    engine: json_engine
-    shortcut: alx
-    categories: general
-    paging: true
-    search_url: https://api.alexandria.org/?a=1&q={query}&p={pageno}
-    results_query: results
-    title_query: title
-    url_query: url
-    content_query: snippet
-    timeout: 1.5
-    disabled: true
     about:
       website: https://alexandria.org/
       official_api_documentation: https://github.com/alexandria-org/alexandria-api/raw/master/README.md
