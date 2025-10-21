@@ -1,5 +1,5 @@
 # see https://docs.searxng.org/admin/settings/settings.html#settings-use-default-settings
-use_default_settings: false
+use_default_settings: true
 server:
   # base_url is defined in the SEARXNG_BASE_URL environment variable, see .env and docker-compose.yml
   secret_key: "e5e482d225d229108b2294ec789657cb2cf34a52fadabdd2fa1e6507f6422daf"  # generated for local testing
@@ -23,7 +23,7 @@ search:
     - torch
     - "yacy images"
 
-engines: []
+# keep engines undefined to allow merging with default settings
 
 # Explicit per-engine configuration to ensure engines are disabled when not configured
 engines_config:
