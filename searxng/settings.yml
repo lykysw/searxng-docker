@@ -2,42 +2,8 @@
 use_default_settings: true
 server:
   # base_url is defined in the SEARXNG_BASE_URL environment variable, see .env and docker-compose.yml
-  secret_key: "e5e482d225d229108b2294ec789657cb2cf34a52fadabdd2fa1e6507f6422daf"  # generated for local testing
+  secret_key: "ultrasecretkey"  # change this!
   limiter: false  # enable this when running the instance for a public usage on the internet
   image_proxy: true
 redis:
-  # redis.url is deprecated; use valkey.url instead. Keep here for reference if needed.
-  # url: redis://redis:6379/0
-
-valkey:
   url: redis://redis:6379/0
-
-search:
-  formats:
-    - html
-    - json # 这一行至关重要！
-  # engines_blocklist: explicit list of engines to block
-  engines_blocklist:
-    - wikidata
-    - ahmia
-    - torch
-    - "yacy images"
-
-# keep engines undefined to allow merging with default settings
-
-# Explicit per-engine configuration to ensure engines are disabled when not configured
-engines_config:
-  ahmia:
-    disabled: true
-  torch:
-    disabled: true
-  "yacy images":
-    disabled: true
-  wikidata:
-    disabled: true
-
-# outgoing settings
-outgoing:
-  # default timeout in seconds, can be override by engine
-  # increased to reduce SPARQL/remote timeouts during engine init
-  request_timeout: 10.0
