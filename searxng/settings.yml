@@ -3,6 +3,9 @@ use_default_settings: true
 server:
   secret_key: "c3d9f6e1b2a4478f9a1b2c3d4e5f6789"
 
+redis:
+  url: "redis://redis:6379/0"
+
 valkey:
   url: "redis://redis:6379/0"
 
